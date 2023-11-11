@@ -17,10 +17,15 @@
   <h1>
     Obtener una foto
   </h1>
-  <video ref="videoElement" autoplay></video>
+  <video width="200" ref="videoElement" autoplay></video>
+  <br><br><br>
   <button @click="activarCamara">Activar Cámara</button>
+  <br><br><br>
   <button @click="cambiarCamara">Cambiar Cámara</button>
+  <br><br><br>
   <button @click="tomarFoto">Tomar Foto</button>
+  <br />
+  <p>Tipo de camara: {{ facingMode }}</p>
 
   <div v-if="imagenDataURL">
     <p>Imagen:</p>
@@ -37,7 +42,7 @@ export default {
     return {
       videoElement: null,
       imagenDataURL: null,
-      facingMode: 'user',
+      facingMode: 'environment',
       isOnline: navigator.onLine,
       isLoading: true,
       ubicacion: {
