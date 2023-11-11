@@ -73,7 +73,7 @@ export default {
       },
     async activarCamara() {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: this.facingMode } });
         this.videoElement.srcObject = stream;
       } catch (error) {
         console.error('Error al activar la cámara:', error);
