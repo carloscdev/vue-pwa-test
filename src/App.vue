@@ -19,6 +19,7 @@
   </h1>
   <video ref="videoElement" autoplay></video>
   <button @click="activarCamara">Activar Cámara</button>
+  <button @click="cambiarCamara">Cambiar Cámara</button>
   <button @click="tomarFoto">Tomar Foto</button>
 
   <div v-if="imagenDataURL">
@@ -36,6 +37,7 @@ export default {
     return {
       videoElement: null,
       imagenDataURL: null,
+      facingMode: 'user',
       isOnline: navigator.onLine,
       isLoading: true,
       ubicacion: {
@@ -79,7 +81,15 @@ export default {
         console.error('Error al activar la cámara:', error);
       }
     },
+    cambiarCamara() {
+      // Cambiar entre cámara frontal y trasera
+      this.facingMode = this.facingMode === 'user' ? 'environment' : 'user';
 
+      // Si la cámara está activada, recargar el stream con la nueva configuración
+      if (this.videoElement.srcObject) {
+        this.activarCamara();
+      }
+    },
     tomarFoto() {
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d');
